@@ -1,0 +1,1 @@
+O objetivo do sistema é a implementação de uma ferramenta que possa realizar o acompanhamento de acordos relacionados aos processos vinculados à SGAI. Tal ferramenta contará com recursos de cadastro de processos, emissão de alertas, registro de parceiros nacionais e internacionais.
