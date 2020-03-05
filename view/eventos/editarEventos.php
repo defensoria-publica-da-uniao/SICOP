@@ -3,7 +3,7 @@
         <div class="modal-content" >
             <div class="modal-header" align="center">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title"><b>Editar Tipos de Andamentos</b></h4>
+                <h4 class="modal-title"><b>Editar Tipos de Eventos</b></h4>
             </div>
 
             <form role="form" name="form_login" method="POST" accept-charset="utf-8" action="<?php echo CONTROLLER . 'eventos.php' ?>">
@@ -11,8 +11,8 @@
                 <input type="hidden" name="arrDadosForm[tabela]" value="tp_evento" />
                 <input type="hidden" name="arrDadosForm[campo_where]" value="id_tp_evento">
                 <input type="hidden" name="arrDadosForm[dt_atualiz]"  value="<?php echo date('Y-m-d H:i:s') ?>"/>
-                <input type="hidden" name="arrDadosForm[id_usuario]" value="<?php echo $_SESSION ['LOGIN']['id_usuario'] ?>">
-                <input type="hidden" id="id_tp_andamento" name="arrDadosForm[id]" value="">
+                <input type="hidden" name="arrDadosForm[str_login]" value="<?php echo $_SESSION ['LOGIN']['str_login'] ?>">
+                <input type="hidden" id="id_evento" name="arrDadosForm[id]" value="">
 
                 <div class="modal-body">
                     <div class="panel panel-default">
@@ -20,7 +20,7 @@
                             <div class="row" style="margin-left: -0px !important; margin-right: -0px !important;">
                                 <div class="form-group col-md-12">
                                     <label style="text-align:left !important;" >Descrição do Evento <span class="required" aria-required="true">*</span></label>
-                                    <input class="form-control" type="text" name="arrDadosForm[descricao]" id="descricao" required="">
+                                    <input class="form-control" type="text" name="arrDadosForm[descricao]" id="descricao2" required="">
                                     <span class="help-block"> Matenha a uniformidade dos dados, outras pessoas irão pesquisar. Conforme os dados já registrados.</span>
                                 </div>
                             </div>

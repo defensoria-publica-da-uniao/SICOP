@@ -51,7 +51,6 @@
                         <tr style="background-color: #D8D8D8">
 
                             <th>Ação</th>
-                            <th>Codigo</th>
                             <th>Descricao</th>
                             <th>Dt_Atualiz</th>
                             <th>Usuário</th>
@@ -66,13 +65,13 @@
                                 <tr>
                                     <td>
                                         <form action="<?php echo CONTROLLER . 'setores.php' ?>" method="POST">
-                                            <input type="hidden" name="arrDadosForm[tabela]" value="setores">
-                                            <input type="hidden" name="arrDadosForm[campo_where]" value="id_setores">
+                                            <input type="hidden" name="arrDadosForm[tabela]" value="setor">
+                                            <input type="hidden" name="arrDadosForm[campo_where]" value="id_setor">
                                             <input type="hidden" name="arrDadosForm[method]" value="apagarSetores">
-                                            <input type="hidden" name="arrDadosForm[id]" value="<?php echo $arSetores['id_setores'] ?>">
+                                            <input type="hidden" name="arrDadosForm[id]" value="<?php echo $arSetores['id_setor'] ?>">
 
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-xs btn-default blue-madison mod popovers" data-toggle="modal" data-doc="<?php echo $arSetores['id_setores']; ?>" data-target='#editarSetores' data-container="body" data-trigger="hover" data-placement="top" data-content="" data-original-title="Editar">
+                                                <button type="button" class="btn btn-xs btn-default blue-madison mod popovers" data-toggle="modal" data-doc="<?php echo $arSetores['id_setor']; ?>" data-target='#editarSetores' data-container="body" data-trigger="hover" data-placement="top" data-content="" data-original-title="Editar">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
                                                 <?php echo "<button type='submit'
@@ -86,7 +85,6 @@
                                             </div>
                                     </td>
 
-                                    <td><?php echo $arSetores['id_setores']; ?></td>
                                     <td><?php echo utf8_encode(($arSetores['descricao'])); ?></td>
                                     <td><?php echo $arSetores['dt_atualiz']; ?></td>
                                     <td><?php echo $arSetores['id_usuario']; ?></td>
@@ -116,10 +114,10 @@ include 'editarSetores.php';
 <script>
                 $(document).ready(function() {
                     $('#editarSetores').on('show.bs.modal', function(e) {
-                        var id_setores = $(e.relatedTarget).data('doc');
+                        var id_setor = $(e.relatedTarget).data('doc');
                         $.ajax({
                             type: 'POST',
-                            data: 'codigo=' + id_setores + '&method=listEditarsetores&acao=ajax',
+                            data: 'codigo=' + id_setor + '&method=listEditarsetores&acao=ajax',
                             url: '<?php echo CONTROLLER; ?>setores.php',
                             success: function(data) {
                                 //console.log(data);

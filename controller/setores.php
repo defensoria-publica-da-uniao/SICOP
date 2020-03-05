@@ -33,7 +33,7 @@ class Setores extends MSetores{
         }
     }
     
-    //apaga o registro de feriados
+    //apaga o registro da tabela setor
     public function apagarSetores()
     {
         //var_dump($_POST);
@@ -41,8 +41,9 @@ class Setores extends MSetores{
         $dados = $_POST['arrDadosForm'];
         $resultado = $this->delete($dados);
 
-        //var_dump($vocabulos);
+        //var_dump($this->sql);
         //exit;
+        
 
         if ($resultado == true) {
             $this->redirect(1, "setores/inicioSetores");
@@ -53,15 +54,15 @@ class Setores extends MSetores{
   
     public function editarSetores()
     {
-        $id = $_POST['id_setores'];
+        $id = $_POST['id_setor'];
 
-        $result = $this->listaDados('setores', $id, "", 'id_setores');
+        $result = $this->listaDados('setor', $id, "", 'id_setor');
 
         $dados = mssql_fetch_array($result);
 
         $arr = array();
 
-        $arr = array('id_setores' => $dados['id_setores'], 'descricao' => $dados['descricao']);
+        $arr = array('id_setor' => $dados['id_setor'], 'descricao' => $dados['descricao']);
 
 
         echo json_encode($arr);
@@ -76,7 +77,7 @@ class Setores extends MSetores{
         //exit;
         $codigorecebe = $_POST["codigo"];
 
-        $consulta = $this->listaDados('setores', $codigorecebe, '', 'id_setores');
+        $consulta = $this->listaDados('setor', $codigorecebe, '', 'id_setor');
 
         $resultado = mssql_fetch_array($consulta);
 
@@ -85,7 +86,7 @@ class Setores extends MSetores{
 
         $arrInfo = Array();
 
-        $arrInfo['codigo'] = $resultado['id_setores'];
+        $arrInfo['codigo'] = $resultado['id_setor'];
         $arrInfo['descricao'] = utf8_encode($resultado['descricao']);
 
         echo json_encode($arrInfo);

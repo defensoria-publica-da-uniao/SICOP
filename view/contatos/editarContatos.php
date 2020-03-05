@@ -11,7 +11,7 @@
                 <input type="hidden" name="arrDadosForm[tabela]" value="contatos" />
                 <input type="hidden" name="arrDadosForm[campo_where]" value="id_contato">
                 <input type="hidden" name="arrDadosForm[dt_atualiz]"  value="<?php echo date('Y-m-d H:i:s') ?>"/>
-                <input type="hidden" name="arrDadosForm[id_usuario]" value="<?php echo $_SESSION ['LOGIN']['id_usuario'] ?>">
+                <input type="hidden" name="arrDadosForm[str_login]" value="<?php echo $_SESSION ['LOGIN']['str_login'] ?>">
                 <input type="hidden" id="codigo" name="arrDadosForm[id]" value="">
 
                 <div class="modal-body">
@@ -19,7 +19,7 @@
                         <div class="panel-body">
                             <div class="row" style="margin-left: -0px !important; margin-right: -0px !important;">
                                 <div class="form-group col-md-12">
-                                    <label style="text-align:left !important;" >Descrição<span class="required" aria-required="true">*</span></label>
+                                    <label style="text-align:left !important;" >Nome<span class="required" aria-required="true">*</span></label>
                                     <input class="form-control" type="text" name="arrDadosForm[descr_contato]" id="contato" required="">
                                 </div>
                             </div>

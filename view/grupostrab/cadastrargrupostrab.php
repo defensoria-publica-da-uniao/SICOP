@@ -11,7 +11,7 @@
                 <input type="hidden" name="arrDadosForm[method]" value="cadastrarGrupostrab">
                 <input type="hidden" name="arrDadosForm[tabela]" value="grupo_trab">
                 <input type="hidden" name="arrDadosForm[dt_atualiz]"  value="<?php echo date('Y-m-d H:i:s') ?>"/>
-                <input type="hidden" name="arrDadosForm[id_usuario]" value="<?php echo $_SESSION ['LOGIN']['id_usuario'] ?>">
+                <input type="hidden" name="arrDadosForm[str_login]" value="<?php echo $_SESSION ['LOGIN']['str_login'] ?>">
 
 
                 <div class="modal-body">

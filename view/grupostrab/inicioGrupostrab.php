@@ -1,6 +1,6 @@
 <!-- TÍTULO E DIRETÓRIO DE NAVEGAÇÃO -->
 <h1 class="page-title">
-    Grupos de Trabalho <small>Cadastrados</small>
+    Indicadores Estratégicos <small>Cadastrados</small>
 </h1>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -33,7 +33,7 @@
 
                 <div class="portlet-title">
                     <div class="caption font-dark">
-                        <span class="caption-subject bold uppercase">Lista de Grupos de Trabalho</span>
+                        <span class="caption-subject bold uppercase">Lista de indicadores estratégicos</span>
                     </div>
                     <div class="tools">
                         <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#cadastrarGrupostrab" class="btn dropdown-toggle" data-toggle="dropdown">
@@ -51,7 +51,6 @@
                         <tr style="background-color: #D8D8D8">
 
                             <th>Ação</th>
-                            <th>Codigo</th>
                             <th>Descricao</th>
                             <th>Evento</th>
                             <th>Público Alvo</th>
@@ -89,9 +88,8 @@
                                             </div>
                                     </td>
 
-                                    <td><?php echo $arGrupostrab['id_grup_trab']; ?></td>
-                                    <td><?php echo utf8_encode(($arGrupostrab['descricao'])); ?></td>
-                                    <td><?php echo $arGrupostrab['descr_tipo']; ?></td>
+                                    <td><?php echo utf8_encode($arGrupostrab['descricao']); ?></td>
+                                    <td><?php echo utf8_encode($arGrupostrab['descr_tipo']); ?></td>
                                     <td><?php echo $arGrupostrab['nr_publico']; ?></td>
                                     <td><?php echo $arGrupostrab['dt_evento']; ?></td>
                                     <td><?php echo $arGrupostrab['dt_atualiz']; ?></td>

@@ -186,6 +186,24 @@ class Banco {
         return $this->query();
     }
 
+    
+    public function deleteChar2($arrDadosForm)
+    {
+        $tabela = $arrDadosForm['tabela'];
+        $id = $arrDadosForm['id'];
+        $campo = $arrDadosForm['campo_where'];
+        $id2 = $arrDadosForm['id2'];
+        $campo2 = $arrDadosForm['campo_where2'];
+        unset($arrDadosForm['tabela']);
+        unset($arrDadosForm['id']);
+        unset($arrDadosForm['campo_where']);
+        unset($arrDadosForm['id2']);
+        unset($arrDadosForm['campo_where2']);
+        $this->sql = " DELETE FROM $tabela WHERE $campo = '$id' and $campo2 = '$id2' ";
+
+        return $this->query();
+    }
+
     /*
      * Lista registros
      */

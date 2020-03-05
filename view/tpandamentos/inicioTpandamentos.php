@@ -10,6 +10,10 @@
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
+            <a href="<?php echo RAIZ . "inicio/inicio"; ?>">Página Início</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
             <span>Diretório de navegação</span>
         </li>
     </ul>
@@ -31,12 +35,12 @@
                     <div class="caption font-dark">
                         <span class="caption-subject bold uppercase">Lista de Tipos de Andamentos</span>
                     </div>
-                    <div class="tools">
+                    <div class="tools"> 
                         <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#cadastrarTpandamento" class="btn dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-plus"></i> Novo registro
                         </button>
                     </div>
-                </div>
+                </div> 
 
                 <div class="portlet-body">
                     <script type="text/javascript" src="https://kryogenix.org/code/browser/sorttable/sorttable.js"></script>
@@ -47,7 +51,6 @@
                         <tr style="background-color: #D8D8D8">
 
                             <th>Ação</th>
-                            <th>Codigo</th>
                             <th>Descrição</th>
                             <th>Dt_Atualiz</th>
                             <th>Usuário</th>
@@ -60,28 +63,27 @@
                                 ?>
                                 <tr>
                                     <td>
-                                        <form action="<?php echo CONTROLLER . 'tpandamentos.php' ?>" method="POST">
-                                            <input type="hidden" name="arrDadosForm[tabela]" value="tp_andamento">
-                                            <input type="hidden" name="arrDadosForm[campo_where]" value="id_tp_andamento">
-                                            <input type="hidden" name="arrDadosForm[method]" value="apagarTpandamento">
-                                            <input type="hidden" name="arrDadosForm[id]" value="<?php echo $arTpandamentos['id_tp_andamento'] ?>">
+                                    <form action="<?php echo CONTROLLER . 'tpandamentos.php' ?>" method="POST">
+                                         <input type="hidden" name="arrDadosForm[tabela]" value="tp_andamento">
+                                         <input type="hidden" name="arrDadosForm[campo_where]" value="id_tp_andamento">
+                                         <input type="hidden" name="arrDadosForm[method]" value="apagarTpandamento">
+                                         <input type="hidden" name="arrDadosForm[id]" value="<?php echo $arTpandamentos['id_tp_andamento'] ?>">
 
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-xs btn-default blue-madison mod popovers" data-toggle="modal" data-doc="<?php echo $arTpandamentos['id_tp_andamento']; ?>" data-target='#editarTpandamento' data-container="body" data-trigger="hover" data-placement="top" data-content="" data-original-title="Editar">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <?php echo "<button type='submit'
+                                         <div class="btn-group">
+                                             <button type="button" class="btn btn-xs btn-default blue-madison mod popovers" data-toggle="modal" data-doc="<?php echo $arTpandamentos['id_tp_andamento']; ?>" data-target='#editarTpandamento' data-container="body" data-trigger="hover" data-placement="top" data-content="" data-original-title="Editar">
+                                                 <i class="fa fa-edit"></i>
+                                             </button>
+                                             <?php echo "<button type='submit'
                                                   class='btn btn-danger  btn-xs'
                                                   data-toggle='confirmation'
                                                   data-original-title='Deseja Excluir?'
                                                   aria-describedby=''>
                                                   <i class='fa fa-trash'></i>
                                                   </button>";
-                                                ?>
-                                            </div>
+                                             ?>
+                                          </div>
                                     </td>
 
-                                    <td><?php echo $arTpandamentos['id_tp_andamento']; ?></td>
                                     <td><?php echo utf8_encode($arTpandamentos['descr_tp_andamento']); ?></td>
                                     <td><?php echo $arTpandamentos['dt_atualiz']; ?></td>
                                     <td><?php echo $arTpandamentos['str_login']; ?></td>
@@ -111,21 +113,22 @@ include 'editarTpandamento.php';
 ?>
 
 <script>
-                $(document).ready(function() {
-                    $('#editarTpandamento').on('show.bs.modal', function(e) {
-                        var id_tp_andamento = $(e.relatedTarget).data('doc');
-                        $.ajax({
-                            type: 'POST',
-                            data: 'id_tp_andamento=' + id_tp_andamento + '&method=editarTpandamento&acao=ajax',
-                            url: '<?php echo CONTROLLER; ?>tpandamentos.php',
-                            success: function(data) {
-                                console.log(data);
-                                var response = $.parseJSON(data);
-                                $("#id_tp_andamento").val(response.id_tp_andamento);
-                                $("#descr_tp_andamento").val(response.descr_tp_andamento);
-                            }
-                        });
-                    });
-                });
+    $(document).ready(function () {
+        $('#editarTpandamento').on('show.bs.modal', function (e) {
+            var id_tp_andamento = $(e.relatedTarget).data('doc');
+            
+            $.ajax({
+                type: 'POST',
+                data: 'id_tp_andamento=' + id_tp_andamento + '&method=editarTpandamento&acao=ajax',
+                url: '<?php echo CONTROLLER; ?>tpandamentos.php',
+                success: function (data) {
+                    var response = $.parseJSON(data);
+                    $("#id_tp_andamento").val(response.id_tp_andamento);
+                    $("#descricao_tp_andamento").val(response.descr_tp_andamento);
+                    console.log(response.descr_tp_andamento);
+                }
+            });
+        });
+    });
 </script>
 

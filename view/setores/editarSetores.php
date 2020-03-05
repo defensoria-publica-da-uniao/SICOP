@@ -8,8 +8,8 @@
 
             <form role="form" name="form_login" method="POST" accept-charset="utf-8" action="<?php echo CONTROLLER . 'setores.php' ?>">
                 <input type="hidden" name="arrDadosForm[method]" value="updateSetores">
-                <input type="hidden" name="arrDadosForm[tabela]" value="setores" />
-                <input type="hidden" name="arrDadosForm[campo_where]" value="id_setores">
+                <input type="hidden" name="arrDadosForm[tabela]" value="setor" />
+                <input type="hidden" name="arrDadosForm[campo_where]" value="id_setor">
                 <input type="hidden" name="arrDadosForm[dt_atualiz]"  value="<?php echo date('Y-m-d H:i:s') ?>"/>
                 <input type="hidden" name="arrDadosForm[id_usuario]" value="<?php echo $_SESSION ['LOGIN']['id_usuario'] ?>">
                 <input type="hidden" id="codigoEditar" name="arrDadosForm[id]" value="">

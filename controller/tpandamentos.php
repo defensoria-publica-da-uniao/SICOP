@@ -16,7 +16,7 @@ class Tpandamentos extends MTpandamentos {
         //var_dump($_POST);
         //exit;
         $descricao = $_POST['arrDadosForm'];
-        $descricao['descr_tp_andamento'] = $descricao['descr_tp_andamento'];
+        $descricao['descr_tp_andamento'] = utf8_decode($descricao['descr_tp_andamento']);
 
         //var_dump($descricao);
         //exit;
@@ -50,19 +50,22 @@ class Tpandamentos extends MTpandamentos {
 
     function editarTpandamento()
     {
-        //var_dump($_POST);
-        //exit;
+        
 
         $id = $_POST['id_tp_andamento'];
 
         $result = $this->listaDados('tp_andamento', $id, "", 'id_tp_andamento');
 
         $dados = mssql_fetch_array($result);
-
+        //var_dump($dados);
+        //exit;
         $arr = array();
 
-        $arr = array('id_tp_andamento' => $dados['id_tp_andamento'], 'descr_tp_andamento' => $dados['descr_tp_andamento']);
-
+        $arr = array('id_tp_andamento' => $dados['id_tp_andamento'], 'descr_tp_andamento' => utf8_encode($dados['descr_tp_andamento']));
+        
+        //var_dump($arr);
+        //exit;
+        
         echo json_encode($arr);
     }
 
@@ -72,6 +75,7 @@ class Tpandamentos extends MTpandamentos {
         //var_dump($_POST);
         //exit;
 
+        $_POST['arrDadosForm']['descr_tp_andamento'] = utf8_decode($_POST['arrDadosForm']['descr_tp_andamento']);
         $result = $this->update($_POST['arrDadosForm']);
 
 

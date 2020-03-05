@@ -13,10 +13,8 @@
                 <input type="hidden" name="arrDadosForm[campo_where]" value="nr_processo">
                 <input type="hidden" name="arrDadosForm[id]" value="" id='nr_processoEdit'>
 
-
                 <input type="hidden" name="arrDadosForm[dt_atualiz]"  value="<?php echo date('Y-m-d H:i:s'); ?>"/>
-                <input type="hidden" name="arrDadosForm[id_usuario]" value="<?php echo $_SESSION ['LOGIN']['id_usuario'] ?>"/>
-
+                <input type="hidden" name="arrDadosForm[str_login]" value="<?php echo $_SESSION ['LOGIN']['str_login'] ?>"/>
 
 
                 <div class="modal-body">
@@ -25,7 +23,7 @@
                             <div class="row" style="margin-left: -0px !important; margin-right: -0px !important;">
                                 <div class="form-group col-md-6">
                                     <label style="text-align:left !important;" >Nº Processo<class="required" aria-required="false"></label>
-                                    <input class="form-control" name="arrDadosForm[nr_processo]" id="processoEditar" type="text" maxlength="20" readonly="">
+                                    <input class="form-control" name="arrDadosForm[nr_processo]" id="processoEditar" type="text" maxlength="20">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label style="text-align:left !important;" >Unidade<span class="required" aria-required="true">*</span></label>
@@ -62,26 +60,29 @@
                                 <div class="col-md-6">
                                     <label class="control-label">Data da Vigência: <span class="required" aria-required="true">*</span></label>
                                     <div class="input-group  input-daterange " data-date-format="">
-                                        <input type="date" class="form-control" placeholder="Data Inicial" id="dt_inicioEditar" value="<?php echo date('Y-m-d'); ?>" name="arrDadosForm[dt_ini_vigencia]" >
+                                        <input type="date" class="form-control" placeholder="Data Inicial" id="dt_inicioEditar" value="<?php echo date('Y-m-d'); ?>" name="arrDadosForm[dt_ini_vigencia]" required="">
                                         <span class="input-group-addon"> até </span>
-                                        <input type="date" class="form-control" placeholder="Data Final" id="dt_finalEditar" name="arrDadosForm[dt_fim_vigencia]" >
+                                        <input type="date" class="form-control" placeholder="Data Final" id="dt_finalEditar" name="arrDadosForm[dt_fim_vigencia]" required="">
                                     </div>
                                 </div>
                             </div>
                             <div class="row" style="margin-left: -0px !important; margin-right: -0px !important;">
+              
                                 <div class="form-group col-md-6">
-                                    <label style="text-align:left !important;" >Juntada:<class="required" aria-required="false"></label>
-                                    <input class="form-control" name="arrDadosForm[juntada]" id="juntadaEditar" type="text" >
+                                    <label style="text-align:left !important;" >Setor:<class="required" aria-required="false"></label>
+                                    <select class="form-control" id="setorEditar" name="arrDadosForm[id_setor]">
+                                        <?php
+                                        echo $oController->comboListar('setor', 'id_setor', 'descricao');
+                                        ?>
+                                    </select>
                                 </div>
-
-
                             </div>
 
                         </div>
                     </div>
                     <div class="modal-footer form-actions" style="background:#F5F5F5; border-radius: 0 0 10px 10px;">
                         <button type="button" class="btn btn-default btn-circle" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success btn-circle">Alterar</button>
+                        <button type="submit" class="btn btn-success btn-circle">Cadastrar</button>
                     </div>
                 </div>
             </form>

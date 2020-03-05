@@ -5,7 +5,7 @@ require_once '/dados/php56/desenvolvimento/SGAI/controller/controller.php';
 class MSetores extends controller{
                     
     public function listarSetores() {
-      $this->sql = " Select * from setores ";
+      $this->sql = " Select * from setor ";
     
       return $this->query();
     }

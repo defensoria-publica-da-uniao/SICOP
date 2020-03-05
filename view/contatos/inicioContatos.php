@@ -51,8 +51,7 @@
                             <tr style="background-color: #D8D8D8">
 
                                 <th>Ação</th>
-                                <th>Codigo</th>
-                                <th>Descricao</th>
+                                <th>Nome</th>
                                 <th>Cargo</th>
                                 <th>e_mail</th>
                                 <th>Telefones</th>
@@ -91,8 +90,7 @@
                                                 </div>
                                         </td>
 
-                                        <td><?php echo $arContatos['id_contato']; ?></td>
-                                        <td><?php echo utf8_encode(($arContatos['descr_contato'])); ?></td>
+                                        <td><?php echo utf8_encode($arContatos['descr_contato']); ?></td>
                                         <td><?php echo ($arContatos['cargo']); ?></td>
                                         <td><?php echo ($arContatos['e_mail']); ?></td>
                                         <td><?php echo $arContatos['telefones']; ?></td>

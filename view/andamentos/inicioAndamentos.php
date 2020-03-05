@@ -33,14 +33,14 @@
         <div class="portlet light ">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-list "></i>
-                    <span class="caption-subject sbold uppercase">Andamentos do Processo: <?= $p1 . '/' . $p2 ?> </span>
+                    <i class="fa fa-list "></i>                                     
+
+                    <span class="caption-subject sbold uppercase">Listagem de Andamentos do Processo : </span> <span style="color:red" class="sbold"</span><?php echo $p1 . '/' . $p2; ?></span>
                 </div>
                 <div class="actions">
                     <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target='#cadastroAndamento' class="btn dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-user-plus"></i>Novo Andamento
                     </button>
-
                 </div>
             </div>
             <div class="portlet-body">
@@ -48,11 +48,13 @@
                     <thead>
                         <tr>
                             <th class="text-center">Ação</th>
-                            <th class="text-center">id_tp_andamento</th>
-                            <th class="text-center">dt_prz_ini</th>
-                            <th class="text-center">dt_prz_fim</th>
-                            <th style="width: 50% !important;" class="text-center">Observação</th>
-                            <th class="text-center">Pendencia</th>
+                            <th style="width: 30% !important; "class="text-left">Andamento</th>
+                            <th class="text-center">Dt Inicial</th>
+                            <th class="text-center">Dt Final</th>
+                            <th style="width: 50% !important;" class="text-left">Observação</th>
+                            <th class="text-center">Pendência</th>
+                            <th>Atualização</th>
+                            <th>Usuário</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,8 +62,7 @@
                         <?php
                         $num_pro = $p1 . "/" . $p2;
 
-
-                        $resultAndamentos = $oAndamentos->listaAndamntos($num_pro);
+                        $resultAndamentos = $oAndamentos->listaAndamentos($num_pro);
                         while ($andamentos = mssql_fetch_array($resultAndamentos)) {
                             ?>
                             <tr>
@@ -75,7 +76,7 @@
 
                                         <div style="float: right !important;" > <!-- class="btn-group"  -->
                                             <?php
-                                            if ($andamentos["pendencia"] == 'n') { #Desativado
+                                            if ($andamentos["pendencia"] == 'N') { #Desativado
                                                 $classIcon = 'fa fa-remove';
                                                 $msgAcao = 'Eliminar Pendencia?';
                                                 $corBtn = 'btn btn-danger hidden';
@@ -85,20 +86,34 @@
                                                 $corBtn = 'btn btn-danger';
                                             }
                                             ?>
-                                            <form onsubmit="return mudarPendencia(<?= $andamentos['id_andamento'] ?>, <?= "'$num_pro'" ?>)" action="<?php echo CONTROLLER . 'andamentos.php'; ?>" method="POST">
-                                                <button type="submit" id="mudarPend<?= $andamentos['id_andamento'] ?>" class="<?php echo $corBtn; ?> btn-xs mod" data-toggle="confirmation" data-original-title="<?php echo $msgAcao; ?>">
+                                            <form  action="<?php echo CONTROLLER . 'andamentos.php'; ?>" method="POST">
+                                                <input type="hidden"  name="arrDadosForm[method]" value="alteraPendencia">
+                                                <input type="hidden"  name="arrDadosForm[id_andamento]" value="<?= $andamentos['id_andamento'] ?>">
+                                                <input type="hidden" name="nr_processo" value="<?=$num_pro;?>">
+                                                <button type="submit" id="mudarPend" class="<?php echo $corBtn; ?> btn-xs mod" data-toggle="confirmation" data-original-title="<?php echo $msgAcao; ?>">
                                                     <i class="<?php echo $classIcon; ?>"></i>
                                                 </button>
+ 
+                                                <!-- <button type="submit" class="btn btn-danger btn-xs" data-toggle="confirmation" data-original-title="Excluir Andamento?" aria-describedby="confirmation">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                </button>
+                                                
+                                                <a href="<?php echo RAIZ . "coordenador/editorTexto/" . $arAssunto['cod_unidade'] . "/" . $arAssunto['id_assunto']; ?>" class="btn btn-primary btn-xs popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="" data-original-title="Editar">
+                                                    <i class="glyphicon glyphicon-align-left"></i>
+                                                </a>
+                                                -->
                                             </form>
                                         </div>
 
                                     </div>
                                 </td>
-                                <td><?= $andamentos['id_tp_andamento'] ?></td>
+                                <td><?= utf8_encode($andamentos['descr_tp_andamento']) ?></td>
                                 <td><?= $andamentos['dt_prz_ini'] ?></td>
                                 <td><?= $andamentos['dt_prz_fim'] ?></td>
-                                <td><?= $andamentos['observacao'] ?></td>
-                                <td id="pend<?= $andamentos['id_andamento'] ?>"><?= $andamentos['pendencia'] == 's' ? "<span style='color:red;font-weight:bold;'>Sim</span>" : "<span style='color:green;font-weight:bold;'>Não</span>"; ?></td>
+                                <td><?= utf8_encode($andamentos['observacao']) ?></td>
+                                <td><?= $andamentos['pendencia'] == 'S' ? 'Sim' : 'Não'; ?></td>
+                                <td><?= $andamentos['dt_atualiz']; ?></td>
+                                <td><?= $andamentos['str_login']; ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -115,20 +130,19 @@ include 'modal/editarAndamento.php';
 ?>
 
 <script>
-    $(document).ready(function() {
-        $('#editarAndamento').on('show.bs.modal', function(e) {
+    $(document).ready(function () {
+        $('#editarAndamento').on('show.bs.modal', function (e) {
             var nr_andamento = $(e.relatedTarget).data('doc');
             $.ajax({
                 type: 'POST',
                 data: 'nr_andamento=' + nr_andamento + '&method=listEditAndamento&acao=ajax',
                 url: '<?php echo CONTROLLER; ?>andamentos.php',
-                success: function(data) {
+                success: function (data) {
                     var response = $.parseJSON(data);
 
                     $("#tpAndamentosEditar").val(response.id_tp_andamento);
-                    $("#dt_inicioEditar").val(response.dt_prz_fim);
-                    $("#pendencia").val(response.pendencia);
-                    $("#dt_finalEditar").val(response.dt_prz_ini);
+                    $("#dt_inicioEditar").val(response.dt_prz_ini);
+                    $("#dt_finalEditar").val(response.dt_prz_fim);
                     $("#observacaoEditar").val(response.observacao);
                     $("#idEditar").val(response.id_andamento);
                 }
@@ -138,22 +152,28 @@ include 'modal/editarAndamento.php';
 </script>
 
 <script>
-    function mudarPendencia(id_andamento, nr_pro) {
-        var processo = nr_pro;
+    function mudarPendencia(id_andamento) {
         var andamento = id_andamento;
-        var pendencia = '#pend' + id_andamento;
-        var botaoPend = '#mudarPend' + id_andamento;
         $.ajax({
             type: 'POST',
-            data: 'andamento=' + andamento + '&nr_processo=' + processo + '&method=alteraPendencia&acao=ajax',
+            data: 'andamento=' + andamento + '&method=alteraPendencia&acao=ajax',
             url: '<?php echo CONTROLLER; ?>andamentos.php',
-
-            success: function() {
-                $(pendencia).html('Não');
-
-                $(botaoPend).addClass('hidden');
+            success: function (dados) {
+                //alert(dados);
             }
         });
         return false;
     }
 </script>
+<!-- 
+
+//Troca de Pendencia via ajax
+  <form onsubmit="return mudarPendencia(<?= $andamentos['id_andamento'] ?>)" action="<?php echo CONTROLLER . 'andamentos.php'; ?>" method="POST">
+                                                <button type="submit" id="mudarPend" class="<?php echo $corBtn; ?> btn-xs mod" data-toggle="confirmation" data-original-title="<?php echo $msgAcao; ?>">
+                                                    <i class="<?php echo $classIcon; ?>"></i>
+                                                </button>
+                                            </form>
+
+
+
+-->

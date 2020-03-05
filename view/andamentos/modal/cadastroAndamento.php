@@ -5,15 +5,15 @@
 
             <div class="modal-header" align="center">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title"><b>Cadastrar Andamentos</b></h4>
+                <h4 class="modal-title"><b>Cadastrar Andamentos do Processo : </b> <span style="color:red" class="sbold"</span><?php echo $p1.'/'.$p2;?></span></h4>  
             </div>
 
             <form role="form" name="form_login" method="POST" accept-charset="utf-8" action="<?php echo CONTROLLER . 'andamentos.php' ?>" >
                 <input type="hidden" name="arrDadosForm[method]" value="cadastrarAndamento">
                 <input type="hidden" name="arrDadosForm[tabela]" value="andamentos">
-                <input type="hidden" name="arrDadosForm[nr_processo]" value="<?= $p1 . '/' . $p2 ?>">
+                <input type="hidden" name="arrDadosForm[nr_processo]" value="<?= $num_pro ?>">
                 <input type="hidden" name="arrDadosForm[dt_atualiz]"  value="<?php echo date('Y-m-d H:i:s'); ?>"/>
-                <input type="hidden" name="arrDadosForm[id_usuario]" value="<?php echo $_SESSION ['LOGIN']['id_usuario'] ?>"/>
+                <input type="hidden" name="arrDadosForm[str_login]" value="<?php echo $_SESSION ['LOGIN']['str_login'] ?>"/>
                 <div class="modal-body">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -28,28 +28,17 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="control-label">Período: <span class="required" aria-required="true">*</span></label>
+                                    <label class="control-label">Dt Inicial &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Data Final<span class="required" aria-required="false"></span></label>
                                     <div class="input-group  input-daterange " data-date-format="">
-                                        <input type="date" class="form-control" placeholder="Data Inicial" id="dt_inicio" value="<?php echo date('Y-m-d'); ?>" name="arrDadosForm[dt_prz_ini]" >
+                                        <input type="date" class="form-control" placeholder="Data Inicial" id="dt_inicio" value="<?php echo date('Y-m-d'); ?>" name="arrDadosForm[dt_prz_ini]" required="">
                                         <span class="input-group-addon"> até </span>
-                                        <input type="date" class="form-control" placeholder="Data Final" id="dt_final" name="arrDadosForm[dt_prz_fim]" >
+                                        <input type="date" class="form-control" placeholder="Data Final" id="dt_final" name="arrDadosForm[dt_prz_fim]">
                                     </div>
                                 </div>
                             </div>
                             <div class="row" style="margin-left: -0px !important; margin-right: -0px !important;">
-                                <div class="form-group col-md-6">
-                                    <label style="text-align:left !important;" >Deseja controlar pendencia?<class="required" aria-required="false"></label>
-                                    <select class="form-control" id="pendencia" name="arrDadosForm[pendencia]">
-                                        <option ></option>
-                                        <option value="s">Sim</option>
-                                        <option value="n">Não</option>
-                                    </select>
-                                </div>
-
-                            </div>
-                            <div class="row" style="margin-left: -0px !important; margin-right: -0px !important;">
                                 <div class="form-group col-md-12">
-                                    <label style="text-align:left !important;" >Objervação:<class="required" aria-required="false"></label>
+                                    <label style="text-align:left !important;" >Observação:<class="required" aria-required="false"></label>
                                     <textarea class="form-control" name="arrDadosForm[observacao]" id="" type="text" ></textarea>
                                 </div>
 

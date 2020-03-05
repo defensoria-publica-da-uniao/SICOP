@@ -11,7 +11,7 @@
                 <input type="hidden" name="arrDadosForm[tabela]" value="grupo_trab" />
                 <input type="hidden" name="arrDadosForm[campo_where]" value="id_grup_trab">
                 <input type="hidden" name="arrDadosForm[dt_atualiz]"  value="<?php echo date('Y-m-d H:i:s') ?>"/>
-                <input type="hidden" name="arrDadosForm[id_usuario]" value="<?php echo $_SESSION ['LOGIN']['id_usuario'] ?>">
+                <input type="hidden" name="arrDadosForm[str_login]" value="<?php echo $_SESSION ['LOGIN']['str_login'] ?>">
                 <input type="hidden" id="codigo" name="arrDadosForm[id]" value="">
                <div class="modal-body">
                     <div class="panel panel-default">

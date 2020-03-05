@@ -6,9 +6,8 @@
     class MTpandamentos extends controller{
 
     function listarTpandamentos() {
-        $this->sql = " Select a.*, u.str_login from tp_andamento as a "
-              . " inner join gr_usuario as U on a.id_usuario = u.id_usuario ";
-        
+        $this->sql = " Select a.* from tp_andamento as a ";
+                 
         return $this->query();
     }
 

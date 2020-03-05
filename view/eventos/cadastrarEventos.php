@@ -1,5 +1,5 @@
 
-<div class="modal fade bs-modal-lg" id="cadastrarEvento" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-modal-lg" id="cadastrarEventos" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" >
 
@@ -9,10 +9,10 @@
             </div>
 
             <form role="form" name="form_login" method="POST" accept-charset="utf-8" action="<?php echo CONTROLLER . 'eventos.php' ?>" >
-                <input type="hidden" name="arrDadosForm[method]" value="cadastrarEvento">
+                <input type="hidden" name="arrDadosForm[method]" value="cadastrar">
                 <input type="hidden" name="arrDadosForm[tabela]" value="tp_evento">
                 <input type="hidden" name="arrDadosForm[dt_atualiz]"  value="<?php echo date('Y-m-d H:i:s') ?>"/>
-                <input type="hidden" name="arrDadosForm[id_usuario]" value="<?php echo $_SESSION ['LOGIN']['id_usuario'] ?>">
+                <input type="hidden" name="arrDadosForm[str_login]" value="<?php echo $_SESSION ['LOGIN']['str_login'] ?>">
 
                 <div class="modal-body">
                     <div class="panel panel-default">

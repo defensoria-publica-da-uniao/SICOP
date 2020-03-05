@@ -11,14 +11,15 @@
                 <input type="hidden" name="arrDadosForm[method]" value="cadastrarContatos">
                 <input type="hidden" name="arrDadosForm[tabela]" value="contatos">
                 <input type="hidden" name="arrDadosForm[dt_atualiz]"  value="<?php echo date('Y-m-d H:i:s') ?>"/>
-                <input type="hidden" name="arrDadosForm[id_usuario]" value="<?php echo $_SESSION ['LOGIN']['id_usuario'] ?>">
+                <input type="hidden" name="arrDadosForm[str_login]" value="<?php echo $_SESSION ['LOGIN']['str_login'] ?>">
 
                 <div class="modal-body">
                     <div class="panel panel-default">
                        <div class="panel-body">
                             <div class="row" style="margin-left: -0px !important; margin-right: -0px !important;">
                                 <div class="form-group col-md-12">
-                                    <label style="text-align:left !important;" >Contatos<span class="required" aria-required="true">*</span></label>
+                                    <label style="text-align:left !important;" >Nome
+                                        <span class="required" aria-required="true">*</span></label>
                                     <input class="form-control" name="arrDadosForm[descr_contato]" id="descr_contato" type="text" required="">
                                 </div>
                             </div>

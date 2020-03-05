@@ -2,20 +2,19 @@
 
 @session_start();
 //Substituir require_once por _SESSION['PATH'];
-require_once '/dados/php56/desenvolvimento/SGAI/controller/controller.php';
+require_once $_SESSION['PATH'] . 'controller/controller.php';
 
 class MAndamentos extends controller {
 
-    function listaAndamntos($processo)
+    function listaAndamentos($processo)
     {
-        $this->sql = "select * from andamentos where nr_processo = '$processo' ";
-        return $this->query();
-    }
+        $this->sql = "Select anda.*, tp.descr_tp_andamento from andamentos as anda "
+                        . "INNER JOIN tp_andamento as tp ON anda.id_tp_andamento = tp.id_tp_andamento "
+                        . "where nr_processo = '$processo' ";
+        
+        //var_dump($this->sql);
+        //exit;
 
-    function buscaQtdPendente($nr_processo)
-    {
-        $this->sql = "select  count(nr_processo) as total from andamentos
-                     where nr_processo = '$nr_processo' and pendencia = 'S'";
         return $this->query();
     }
 

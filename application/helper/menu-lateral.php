@@ -1,19 +1,19 @@
 <?php
-define('DESKTOP', 'visible-md visible-lg visible-sm hidden-xs');
-define('MOBILE', 'visible-xs hidden-sm hidden-md hidden-lg');
+    define('DESKTOP', 'visible-md visible-lg visible-sm hidden-xs');
+    define('MOBILE', 'visible-xs hidden-sm hidden-md hidden-lg');
 ?>
 <script>
-    function sair() {
+    function sair(){ 
         $(document).ready(function() {
             $('.openForm').click(function(event) {
                 event.preventDefault();
                 $form = $('#transport');
 
                 // Extrai os dados dos atributos customizados do link tirando o prefixo "data-"
-                var data = extractData(this);
+                var data = extractData(this); 
 
                 // Preenche os dados no form
-                for (var attr in data) {
+                for(var attr in data) {
                     $form.find('input[name="' + attr + '"]').val(data[attr]);
                 }
 
@@ -23,11 +23,10 @@ define('MOBILE', 'visible-xs hidden-sm hidden-md hidden-lg');
                 // Submete o form
                 $form.submit();
             });
-        }
-        );
+        });
         <form action="#" method="post" style="display:none" id="transport">
-                <input type="hidden" name="method" />
-        <input type="hidden" name="cliente" />
+            <input type="hidden" name="method" />
+            <input type="hidden" name="cliente" />
         </form>
 
 </script>
@@ -40,7 +39,7 @@ define('MOBILE', 'visible-xs hidden-sm hidden-md hidden-lg');
         <!-- BEGIN SIDEBAR MENU -->
 
         <ul class="page-sidebar-menu page-header-fixed page-sidebar-menu-hover-submenu page-sidebar-menu-compact" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-
+            
             <li class="nav-item start ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-home"></i>
@@ -68,64 +67,64 @@ define('MOBILE', 'visible-xs hidden-sm hidden-md hidden-lg');
                     </li>
                 </ul>
             </li>
-
-            <!--          <li class="nav-item start">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="icon-folder"></i>
-                                <span class="title">Links 1</span>
-                                <span class="arrow "></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item">
-                                    <a href="javascript:;" class="nav-link nav-toggle">
-                                        <i class="icon-settings"></i> Item 1
-                                        <span class="arrow"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="icon-user"></i> Arrow Toggle
-                                                <span class="arrow nav-toggle"></span>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li class="nav-item">
-                                                    <a href="#" class="nav-link">
-                                                        <i class="icon-power"></i> Sample Link 1</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="#" class="nav-link">
-                                                        <i class="icon-paper-plane"></i> Sample Link 1</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="icon-camera"></i> Sample Link 1</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="icon-bar-chart"></i> Item 3
-                                        <span class="badge badge-success">1</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-            -->
-
+            
+<!--          <li class="nav-item start">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-folder"></i>
+                    <span class="title">Links 1</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-settings"></i> Item 1
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="icon-user"></i> Arrow Toggle
+                                    <span class="arrow nav-toggle"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="icon-power"></i> Sample Link 1</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="icon-paper-plane"></i> Sample Link 1</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="icon-camera"></i> Sample Link 1</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="icon-bar-chart"></i> Item 3 
+                            <span class="badge badge-success">1</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+   -->         
+            
             <li class="nav-item start ">
-                <a href="<?php echo RAIZ . "processo/inicioProcesso" ?>" class="nav-link nav-toggle">
+                <a href="<?php echo RAIZ . "processo/inicioProcesso"?>" class="nav-link nav-toggle">
                     <i class="icon-book-open"></i>
                     <span class="title">Processos</span>
                     <span class="arrow"></span>
                 </a>
             </li>
             <li class="nav-item start ">
-                <a href="<?php echo RAIZ . "grupostrab/inicioGrupostrab" ?>" class="nav-link nav-toggle">
+                <a href="<?php echo RAIZ . "grupostrab/inicioGrupostrab"?>" class="nav-link nav-toggle">
                     <i class="icon-book-open"></i>
-                    <span class="title">Grupos de Trabalhos</span>
+                    <span class="title" style="font-size: 0.95em">Indicadores Estratégicos</span>
                     <span class="arrow"></span>
                 </a>
             </li>
@@ -145,7 +144,7 @@ define('MOBILE', 'visible-xs hidden-sm hidden-md hidden-lg');
                     <li class="nav-item start ">
                         <a href="<?php echo RAIZ . "testorg/inicioTestorg"; ?>" class="nav-link ">
                             <i class="icon-users"></i>
-                            <span class="title">Organizações</span>
+                            <span class="title">Parceiros</span>
                         </a>
                     </li>
                     <li class="nav-item start ">
@@ -198,13 +197,21 @@ define('MOBILE', 'visible-xs hidden-sm hidden-md hidden-lg');
                     </li>
                 </ul>
             </li>
-
+          
             <li class="nav-item start ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-settings"></i>
                     <span class="title">Relatórios</span>
                     <span class="arrow"></span>
                 </a>
+                               <ul class="sub-menu">
+                    <li class="nav-item start ">
+                        <a href="<?php echo RAIZ . "relatorios/relProcessos"; ?>" class="nav-link ">
+                            <i class="icon-users"></i>
+                            <span class="title">Processos</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
 
@@ -253,15 +260,15 @@ define('MOBILE', 'visible-xs hidden-sm hidden-md hidden-lg');
                     </li>
                 </ul>
             </li>
-
+            
             <li class="nav-item start ">
-                <a href="<?php echo RAIZ . "inicio/manual" ?>" class="nav-link nav-toggle">
+                <a href="<?php echo RAIZ . "inicio/manual"?>" class="nav-link nav-toggle">
                     <i class="icon-book-open"></i>
                     <span class="title">Manual do Sistema</span>
                     <span class="arrow"></span>
                 </a>
             </li>
-
+            
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>

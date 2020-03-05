@@ -1,5 +1,4 @@
 <!-- TÍTULO E DIRETÓRIO DE NAVEGAÇÃO -->
-
 <h1 class="page-title">
     Processos <small>Controle de Processos</small>
 </h1>
@@ -8,6 +7,10 @@
         <li>
             <i class="icon-home"></i>
             <span>Home</span>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="<?php echo RAIZ . "inicio/inicio"; ?>">Página Início</a>
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
@@ -21,26 +24,6 @@
     </div>
 </div>
 <!-- FIM TÍTULO E DIRETÓRIO DE NAVEGAÇÃO -->
-<div class="portlet light ">
-
-    <div class="portlet-title">
-        <form action="<?php echo CONTROLLER . 'processo.php'; ?>" method="POST">
-            <div class="form-group col-md-11">
-
-                <input type="hidden" name="arrDadosForm[method]" value="guardarVocabulos">
-                <select class="form-control" id="select2" multiple="multiple" name="arrDadosForm[vocabulos][]"  >
-                    <?php
-                    echo $oController->comboListarArray('vocabulos', 'id_vocabulo', 'vocabulo', @$_SESSION['vocabulos']);
-                    ?>
-                </select>
-            </div>
-            <div class=" col-md-1">
-                <button class="btn btn-primary">Filtrar</button>
-            </div>
-        </form>
-
-    </div>
-</div>
 
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -54,13 +37,15 @@
                     <i class="fa fa-list "></i>
                     <span class="caption-subject sbold uppercase">Controle de Processos</span>
                 </div>
-
                 <div class="actions">
-
                     <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target='#cadastroProcesso' class="btn dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-user-plus"></i>Novo Pocesso
+                        <i class="fa fa-user-plus"></i>Processos Incompletos
                     </button>
-
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target='#cadastroProcesso' class="btn dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user-plus"></i>Novo Processo
+                    </button>
                 </div>
             </div>
             <div class="portlet-body">
@@ -68,18 +53,20 @@
                     <thead>
                         <tr>
                             <th class="text-center">Ação</th>
-                            <th style="width: 20% !important; ">Nº Processo</th>
-                            <th style="width: 80% !important;">Objeto</th>
-                            <th>Vigencia</th>
+                            <th style="width: 15% !important; ">Nº Processo</th>
+                            <th style="width: 70% !important;">Objeto</th>
+                             
+                            <th style="width: 10% !important;">Vigência</th>
                             <th>Unidade</th>
                             <th>Repasse</th>
-                            <th>Organização</th>
-                            <th>Juntada</th>
+                            <th>Parceiro</th>
+                            <th>Atualização</th>
+                            <th>Usuário</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $resultProcessos = $oProcesso->listaProcess(@$_SESSION['vocabulos']);
+                        $resultProcessos = $oProcesso->listarrrProcessos();
 
                         while ($processos = mssql_fetch_array($resultProcessos)) {
                             ?>
@@ -96,13 +83,10 @@
                                                     <a  data-toggle="modal" data-doc="<?php echo $processos['nr_processo']; ?>" data-target='#editarProcesso' data-container="body" data-trigger="hover" data-placement="top" data-content="" data-original-title="Editar"> Editar </a>
                                                 </li>
                                                 <li>
-                                                    <a href="<?php echo RAIZ . "andamentos/inicioAndamentos/" . $processos['nr_processo']; ?>"> Andamentos </a>
+                                                    <a href="<?php echo RAIZ . "relacionar/inicioRelacionar/" . $processos['nr_processo']; ?>"> Relacionar </a>
                                                 </li>
                                                 <li>
-                                                    <a href="<?php echo RAIZ . "processo/proc_voc/" . $processos['nr_processo']; ?>"> Indexar Vocábulos </a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo RAIZ . "processo/acompanhamento/" . $processos['nr_processo']; ?>"> Acompanhamento </a>
+                                                    <a href="<?php echo RAIZ . "andamentos/inicioAndamentos/" . $processos['nr_processo']; ?>"> Andamento </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -133,15 +117,16 @@
                                 </td>
                                 <td <?= $processos['status'] == 2 ? "style='color:red;font-weight:bold'" : ''; ?>><?= utf8_encode($processos['nr_processo']) ?></td>
                                 <td><?= $processos['objeto'] ?></td>
-                                <td> <?= $oController->dataPt($processos['dt_ini_vigencia']); ?> á
+                                <td>Inicio: <?= $oController->dataPt($processos['dt_ini_vigencia']); ?>
                                     <br/>
-                                    <?= $oController->dataPt($processos['dt_fim_vigencia']); ?>
+                                    Final : <?= $oController->dataPt($processos['dt_fim_vigencia']); ?>
                                 </td>
                                 <td><?= utf8_encode($processos['cod_unidade']) ?></td>
                                 <td><?= $processos['repasse'] == 1 ? "Sim" : "Não"; ?></td>
                                 <td><?= utf8_encode($processos['organizacao']) ?></td>
-                                <td><?= $processos['juntada'] ?></td>
-                            </tr>
+                                <td><?= $processos['dt_atualiz']; ?></td>
+                                <td><?= $processos['str_login']; ?></td>
+                           </tr>
                         <?php } ?>
                     </tbody>
                 </table>
@@ -175,9 +160,8 @@ include 'modal/editarProcesso.php';
                     $("#objetoEditar").val(response.objeto);
                     $("#repasseEditar").val(response.repasse);
                     $("#organizacaoEditar").val(response.id_organizacao);
-                    $("#dt_inicioEditar").val(response.dt_fim_vigencia);
-                    $("#dt_finalEditar").val(response.dt_ini_vigencia);
-                    $("#juntadaEditar").val(response.juntada);
+                    $("#dt_inicioEditar").val(response.dt_ini_vigencia);
+                    $("#dt_finalEditar").val(response.dt_fim_vigencia);
                     $("#repasseEditar").val(response.repasse);
                     $("#setorEditar").val(response.id_setor);
                 }
@@ -185,6 +169,3 @@ include 'modal/editarProcesso.php';
         });
     });
 </script>
-
-
-

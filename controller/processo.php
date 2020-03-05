@@ -14,14 +14,7 @@ class Processo extends MProcesso {
     function cadastrarProcesso()
     {
         $arrDadosForm = $_POST['arrDadosForm'];
-
-        $resultBuscaSetorUsuario = $this->buscaSetorUsuario($arrDadosForm['id_usuario']);
-        $dadosSetor = mssql_fetch_array($resultBuscaSetorUsuario);
-        $idSetorUsuario = $dadosSetor['id_setor_usuario'];
-        $arrDadosForm['id_setor_usuario'] = $idSetorUsuario;
         $insere = $this->insert($arrDadosForm);
-
-
 
         if ($insere == true) {
             $this->redirect(1, 'processo/inicioProcesso');
@@ -33,7 +26,15 @@ class Processo extends MProcesso {
     function alterarProcesso()
     {
         $arrDadosForm = $_POST['arrDadosForm'];
+        
+        //var_dump($arrDadosForm);
+        //exit;
+        
         $result = $this->updateChar($arrDadosForm);
+        
+        //var_dump($this->sql);
+        //exit;
+        
         if ($result == true) {
             $this->redirect(1, 'processo/inicioProcesso');
         } else {
@@ -47,6 +48,10 @@ class Processo extends MProcesso {
         if ($arrDadosForm['status'] == 1) {
             $arrDadosForm['status'] = 2;
             $result = $this->updateChar($arrDadosForm);
+            
+            //var_dump($this->sql);
+            //exit;
+            
             if ($result == true) {
                 $this->redirect(1, 'processo/inicioProcesso');
             } else {
@@ -55,6 +60,7 @@ class Processo extends MProcesso {
         } else {
             $arrDadosForm['status'] = 1;
             $result = $this->updateChar($arrDadosForm);
+            
             if ($result == true) {
                 $this->redirect(1, 'processo/inicioProcesso');
             } else {
@@ -63,14 +69,24 @@ class Processo extends MProcesso {
         }
     }
 
+    function listarrrProcessos()
+    {
+        return $this->listaProcessos();
+        
+    }    
     function listAlteraProcesso()
+
     {
         $nr_processo = $_POST['nr_processo'];
+          
         $resultadoEdit = $this->listaProcessoString($nr_processo);
         $resultadoProcesso = mssql_fetch_array($resultadoEdit);
+   
+        //var_dump($resultadoProcesso);
+        //exit;
 
         $processo = array();
-
+        
         $processo['nr_processo'] = $resultadoProcesso['nr_processo'];
         $processo['cod_unidade'] = $resultadoProcesso['cod_unidade'];
         $processo['objeto'] = $resultadoProcesso['objeto'];
@@ -78,53 +94,13 @@ class Processo extends MProcesso {
         $processo['id_organizacao'] = $resultadoProcesso['id_organizacao'];
         $processo['dt_ini_vigencia'] = $resultadoProcesso['dt_ini_vigencia'];
         $processo['dt_fim_vigencia'] = $resultadoProcesso['dt_fim_vigencia'];
-        $processo['juntada'] = $resultadoProcesso['juntada'];
+        $processo['pendencia'] = $resultadoProcesso['pendencia'];
         $processo['status'] = $resultadoProcesso['status'];
         $processo['id_setor'] = $resultadoProcesso['id_setor'];
+        $processo['str_login'] = $resultadoProcesso['str_login'];
+        $processo['dt_atualiz'] = $resultadoProcesso['dt_atualiz'];
 
         echo json_encode($processo);
-    }
-
-    function indexarProcVoc()
-    {
-        $arrDadosForm = $_POST['arrDadosForm'];
-        $resultInsert = $this->insert($arrDadosForm);
-
-        if ($resultInsert == true) {
-            $this->redirect(1, 'processo/proc_voc/' . $arrDadosForm[nr_processo]);
-        } else {
-            $this->redirect(2, 'processo/proc_voc/' . $arrDadosForm[nr_processo]);
-        }
-    }
-
-    function removerVocabulo()
-    {
-        $arrDadosForm = $_POST['arrDadosForm'];
-        $resultRemove = $this->deleteChar($arrDadosForm);
-
-        if ($resultRemove == true) {
-            $this->redirect(1, 'processo/proc_voc/' . $arrDadosForm['nr_processo']);
-        } else {
-            $this->redirect(1, 'processo/proc_voc/' . $arrDadosForm['nr_processo']);
-        }
-    }
-
-    function listaProcess($vocabulos = null)
-    {
-
-        if ($vocabulos == null) {
-            unset($_SESSION['vocabulos']);
-            return $this->listaProcessos($nr_processo = null);
-        } else {
-            unset($_SESSION['vocabulos']);
-            return $this->listaProcessoVoc($vocabulos);
-        }
-    }
-
-    function guardarVocabulos()
-    {
-        $_SESSION['vocabulos'] = $_POST['arrDadosForm']['vocabulos'];
-        $this->redirect('', "processo/inicioProcesso");
     }
 
 }

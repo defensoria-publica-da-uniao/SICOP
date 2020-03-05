@@ -488,7 +488,7 @@ class controller extends Banco {
                 }
                 \$o{$newModulo} = new {$newModulo}();
                 \$classe = '{$newModulo}';
-                \$o{$newModulo} = \$o{$newModulo};
+                \$oBjeto = \$o{$newModulo};
                 @include_once '../application/request.php';
 
             ?>";
@@ -568,14 +568,7 @@ class controller extends Banco {
         $this->insert($arr);
     }
 
-    function listaProcessos($nr_processo = null)
-    {
-        ($nr_processo != null) ? $where = 'WHERE nr_processo = ' . "'$nr_processo'" : $where = null;
-        $this->sql = "SELECT pro.*, uni.desc_unidade, org.organizacao FROM processos AS pro
-                    INNER JOIN unidade as uni ON pro.cod_unidade = uni.cod_unidade
-                    INNER JOIN organizacao AS org  ON pro.id_organizacao = org.id_organizacao $where";
-        return $this->query();
-    }
+
 
 }
 
